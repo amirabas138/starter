@@ -2,6 +2,7 @@ from django.db import models
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 from django.db.models.signals import post_save
+from django.utils import timezone
 
 
 class MyUserManager(BaseUserManager):
@@ -96,3 +97,20 @@ def save_profile_user(sender, **kwargs):
 post_save.connect(save_profile_user, sender=MyUser)
 
 
+class Post(models.Model):
+    STATUS_CHOICES = (
+        ('p', 'publish'),
+        ('d', 'draft')
+    )
+    title = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=100, unique=True )
+    # Category = models.ManyToManyField(Category,)
+    description = models.TextField()
+    thumbnail = models.ImageField(upload_to="image/")
+    publish = models.DateTimeField(default=timezone.now)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    status = models.CharField(max_length=1, choices=STATUS_CHOICES)
+
+    def __str__(self):
+        return self.title

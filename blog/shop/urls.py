@@ -8,7 +8,7 @@ urlpatterns = [
     path("logout/", logout_view ,name="logout"),
     path("home/",home,name="home"),
     path("ProfileUpdate/",ProfileUpdate,name='ProfileUpdate'),
-
+    path('index/' , index , name="index")
 
 
 ]

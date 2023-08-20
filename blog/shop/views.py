@@ -67,3 +67,11 @@ def ProfileUpdate(request):
         profile_form = ProfileUpdateForm(instance=request.user.Profile)
     context = {'profile_form': profile_form, 'user_form': user_form}
     return render(request, 'shop/UpdateProfile.html', context)
+
+
+def index(request):
+    post = Post.objects.all()
+    context = {
+        'post':post
+    }
+    return render(request , 'shop/index.html' , context)

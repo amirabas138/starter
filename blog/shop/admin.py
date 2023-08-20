@@ -8,3 +8,4 @@ class userAdmin(admin.ModelAdmin):
     ordering=['is_admin']
 # Register your models here.
 admin.site.register(MyUser,userAdmin)
+admin.site.register(Post)
