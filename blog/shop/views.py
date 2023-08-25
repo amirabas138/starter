@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from pyexpat.errors import messages
@@ -49,8 +49,10 @@ def logout_view(request):
     logout(request)
     return redirect("shop:login")
 
-def home (request):
-    return render(request,'shop/home.html')
+
+def home(request):
+    return render(request, 'shop/home.html')
+
 
 def ProfileUpdate(request):
     if request.method == 'POST':
@@ -70,8 +72,14 @@ def ProfileUpdate(request):
 
 
 def index(request):
-    post = Post.objects.all()
+    post = Post.objects.filter(status='p').order_by('-publish')
     context = {
-        'post':post
+        'post': post
     }
-    return render(request , 'shop/index.html' , context)
+    return render(request, 'shop/index.html', context)
+
+
+def singelPost(request,slug):
+    post = get_object_or_404(Post, slug=slug, status='p')
+
+
