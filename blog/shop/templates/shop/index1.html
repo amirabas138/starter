@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+<table style="width: 10px" border="10     " bgcolor="red"  >
+
+
+       <tr bgcolor="blue">
+
+{% for posts in post %}
+    <td bgcolor="blue">
+    <p>
+        <a href="{%  url 'shop:singlePost' posts.slug %}">{{ posts.title }}</a>
+        <img src="{{ posts.thumbnail.url }}" alt=""width="100" height="100" border="5px">
+    </p>
+    </td>
+    </tr>
+{% endfor  %}
+</table>
+</body>
+</html>
