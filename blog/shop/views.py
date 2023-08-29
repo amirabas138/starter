@@ -79,12 +79,18 @@ def index(request):
     return render(request, 'shop/index.html', context)
 
 
-def singlePost(request,slug):
+def singlePost(request, slug):
     post = get_object_or_404(Post, slug=slug, status='p')
     context = {
         'post': post
     }
-    return render(request , 'shop/single.html' , context)
+    return render(request, 'shop/single.html', context)
 
 
+def contact(request):
+    return render(request, 'shop/contact.html')
+def post(request):
+    return render(request, 'shop/post.html')
+def about(request):
+    return render(request,'shop/about.html')
 
