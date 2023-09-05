@@ -84,13 +84,12 @@ def singlePost(request, slug):
     context = {
         'post': post
     }
-    return render(request, 'shop/single.html', context)
+    return render(request, 'shop/post.html', context)
 
 
 def contact(request):
     return render(request, 'shop/contact.html')
-def post(request):
-    return render(request, 'shop/post.html')
+
 def about(request):
     return render(request,'shop/about.html')
 

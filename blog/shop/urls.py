@@ -11,7 +11,6 @@ urlpatterns = [
     path('index/' , index , name="index"),
     path('contact/' , contact , name="contact"),
     path('about/' , about , name="about"),
-    path('post/' , post , name="post"),
     path('singlepost/<slug:slug>' , singlePost , name="singlePost")
 
 ]
