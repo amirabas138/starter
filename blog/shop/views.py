@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from pyexpat.errors import messages
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 from .forms import *
 from .models import MyUser
@@ -16,10 +16,10 @@ def Login(request):
         user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
-            return HttpResponse('login')
+            return redirect('shop:index')
             # Redirect to a success page.
         else:
-            return HttpResponse('false login')
+            return redirect('shop:login')
             # Return an 'invalid login' error message.
     else:
         return render(request, 'shop/login.html')
@@ -36,13 +36,13 @@ def Register(request):
             data = form.cleaned_data
             user = MyUser.objects.create_user(email=data['email'], username=data['username'], password=data['password'])
             user.save()
-            return HttpResponse('ok')
+            return redirect('shop:login')
         else:
-            return HttpResponse('not')
+            return redirect('shop:home')
     else:
         form = UserCreateForm()
     context = {'form': form}
-    return render(request, 'shop/signup.html', context)
+    return render(request, 'shop/register.html', context)
 
 
 def logout_view(request):
@@ -50,10 +50,9 @@ def logout_view(request):
     return redirect("shop:login")
 
 
-def home(request):
-    return render(request, 'shop/home.html')
 
 
+@login_required(login_url='/login/')
 def ProfileUpdate(request):
     if request.method == 'POST':
         user_form = UserUpdateForm(request.POST, instance=request.user)
@@ -78,7 +77,7 @@ def index(request):
     }
     return render(request, 'shop/index.html', context)
 
-
+@login_required(login_url='/login/')
 def singlePost(request, slug):
     post = get_object_or_404(Post, slug=slug, status='p')
     context = {
