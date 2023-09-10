@@ -87,6 +87,13 @@ def singlePost(request, slug):
 
 
 def contact(request):
+    if request.method=='POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        message = request.POST.get('message')
+        Contact.objects.create(name = name, email = email,phone = phone , massage = message)
+
     return render(request, 'shop/contact.html')
 
 def about(request):

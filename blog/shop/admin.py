@@ -9,3 +9,4 @@ class userAdmin(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(MyUser,userAdmin)
 admin.site.register(Post)
+admin.site.register(Contact)
