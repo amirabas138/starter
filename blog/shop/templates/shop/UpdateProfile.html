@@ -4,14 +4,43 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
-<form method="post">
+<body style="border:4px solid blue; align-content: center ;width: 50%">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ profile_form.as_p }}
-    {{ user_form.as_p }}
-    <p>
+ <p dir="rtl" align="center">
+     <label for="">first name</label>
+     <input type="text" name="first_name" maxlength="50">
+ </p>
+    <p dir="rtl" align="center">
+        <label for="">last name</label>
+
+        <input type="text" name="last_name" maxlength="50">
+    </p>
+    <p dir="rtl" align="center">
+        <label for="">phone</label>
+
+        <input type="text" name="phone" maxlength="11">
+    </p>
+    <p dir="rtl" align="center">
+        <label for="">image</label>
+
+        <input type="file" name="photo"  required="">
+    </p>
+    <p dir="rtl" align="center">
+        <label for="">email</label>
+
+        <input type="email" name="email" value="" maxlength="255" required="">
+    </p>
+    <p dir="rtl" align="center">
+        <label for="">username</label>
+
+        <input type="text" name="username" value="" maxlength="70" required="">
+    </p>
+
+    <p dir="rtl" align="center">
         <input type="submit">
     </p>
+
 </form>
 </body>
 </html>

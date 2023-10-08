@@ -27,7 +27,7 @@ def Login(request):
 
 def Register(request):
     if request.user.is_authenticated:
-        return redirect('shop:home')
+        return redirect('shop:index')
     if request.method == 'POST':
         form = UserCreateForm(request.POST)
         username = form['username'].value()
@@ -38,7 +38,7 @@ def Register(request):
             user.save()
             return redirect('shop:login')
         else:
-            return redirect('shop:home')
+            return redirect('shop:index')
     else:
         form = UserCreateForm()
     context = {'form': form}
@@ -57,11 +57,12 @@ def ProfileUpdate(request):
     if request.method == 'POST':
         user_form = UserUpdateForm(request.POST, instance=request.user)
         profile_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.Profile)
+        print(user_form,profile_form)
         if profile_form.is_valid() or user_form.is_valid():
             profile_form.save()
             user_form.save()
-            messages.success(request, 'Update Successfully', 'success')
-            return redirect('administrator:home')
+            # messages.success(request, 'Update Successfully', 'success')
+            return redirect('shop:index')
 
     else:
         user_form = UserUpdateForm(instance=request.user)
